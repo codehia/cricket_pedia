@@ -1,4 +1,4 @@
-import { ADD_DATA, SHOW_DATA, FILTER_DATA } from './types';
+import { ADD_DATA, SHOW_DATA, FILTER_DATA, SORT_DATA } from './types';
 
 var playerId = 0
 
@@ -19,5 +19,14 @@ export const filterData = (data) => {
         type: FILTER_DATA,
         country:data.country
     })    
+}
+
+export const sortData = (data) => {
+    console.log('there there')
+    return({
+        type:SORT_DATA,
+        format:data.format,
+        criteria:data.criteria
+    })
 }
 // export filterData

@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { SHOW_DATA, FILTER_DATA } from "../redux/actions/types";
 import ShowTable from "./Table";
 import getPlayerDetails from "../redux/selector";
-import { filterData } from "../redux/actions/actions";
+import { filterData, sortData } from "../redux/actions/actions";
+// import {  } from "../redux/actions/actions";
 
 const mapStateToProps = state => {
-  console.log(state)
   return { playerDetails: state.addDataReducer.currentPlayers };
 };
 
@@ -33,13 +33,16 @@ class Show extends Component {
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.props.filterData({ country: event.target.value })
   }
 
+  sortRecords = (event, criteria='ascending') => {
+    let cri = (criteria === 'ascending') ? 'descending' : 'ascending';
+    this.props.sortData({ format: event.target.value, criteria:cri})
+  }
 
   render() {
-    // console.log(this.props)
     return (
       <>
         <select name="country" onChange={this.handleChange}>
@@ -55,7 +58,9 @@ class Show extends Component {
             );
           })}
         </select>
-        {/* <button>Filter</button> */}
+        <button value='t20' onClick={this.sortRecords}>T20</button>
+        <button value='odi'>ODI</button>
+        <button value='test'>TEST</button>
         <ShowTable currentPlayers={this.props.playerDetails || []} />
       </>
     );
@@ -64,5 +69,5 @@ class Show extends Component {
 
 export default connect(
   mapStateToProps,
-  { filterData }
+  { filterData, sortData }
 )(Show);

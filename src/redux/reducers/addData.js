@@ -1,4 +1,4 @@
-import { ADD_DATA, FILTER_DATA } from '../actions/types';
+import { ADD_DATA, FILTER_DATA, SORT_DATA } from '../actions/types';
 import { getPlayerDetails } from '../selector';
 
 const initialState = {
@@ -23,6 +23,9 @@ const addDataReducer = (state = initialState, action) => {
                 ...state, 
                 currentPlayers: filteredArr};
             // console.log('here I am ')
+        }
+        case SORT_DATA: {
+            console.log(state)
         }
         default: 
             return state
